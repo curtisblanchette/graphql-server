@@ -37,6 +37,11 @@ export class PostsResolver {
         return newPost;
     }
 
+    @Mutation(returns => Boolean)
+    async upVotePost(@Args('id', {type: () => Int}) postId: number): Promise<boolean> {
+        return this.postsService.upVote(postId);
+    }
+
     @ResolveField()
     async author(@Parent() post: Post): Promise<Author> {
         const { author } = post;
